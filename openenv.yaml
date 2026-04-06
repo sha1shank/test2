@@ -1,0 +1,31 @@
+name: warehouse-order-fulfillment
+version: 0.1.0
+description: >
+  OpenEnv environment for autonomous warehouse order fulfillment.
+  The agent controls a robot that must pick required items, avoid wrong
+  deliveries, and bring completed orders to a shipping pallet.
+language: python
+entrypoint: warehouse_env.env:WarehouseFulfillmentEnv
+observation_type: |
+  {
+    "robot_position": [0, 0],
+    "inventory": ["A", "B"],
+    "order_items": ["A", "B"],
+    "completed_items": ["A"],
+    "visible_items": {"A": [1, 1], "B": [2, 3]},
+    "time_step": 3,
+    "max_steps": 18,
+    "task_name": "easy",
+    "remaining_distance": 2.0
+  }
+action_type: |
+  {
+    "action_type": "move",
+    "direction": "north"
+  }
+reward_range: [0.0, 1.0]
+max_episode_steps: 50
+tasks:
+  - easy
+  - medium
+  - hard
